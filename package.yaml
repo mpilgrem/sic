@@ -1,0 +1,60 @@
+name:                sic
+version:             0.1.0.0
+github:              "mpilgrem/sic"
+license:             BSD3
+author:              "Mike Pilgrem"
+maintainer:          "public@pilgrem.com"
+copyright:           "Copyright 2018 Mike Pilgrem"
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Test
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/mpilgrem/sic#readme>
+
+flags:
+  build-lib:
+    description: Build the library
+    manual:      false
+    default:     true
+  build-app:
+    description: Build the application
+    manual:      false
+    default:     false
+
+dependencies:
+- base >= 4.7 && < 5
+- bytestring
+- Cabal
+- cassava
+- containers
+- directory
+- filepath
+- http-conduit
+- optparse-applicative
+- text
+- vector
+
+ghc-options:
+- -Wall
+
+library:
+  when:
+    - condition: "!flag(build-lib)"
+      buildable: false
+  source-dirs: src
+
+executables:
+  uksic2007:
+    when:
+      - condition: "!flag(build-app)"
+        buildable: false
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
