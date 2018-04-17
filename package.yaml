@@ -36,6 +36,7 @@ dependencies:
 - http-conduit
 - optparse-applicative
 - text
+- unordered-containers
 - vector
 
 ghc-options:
